@@ -380,7 +380,7 @@ EOF
 
 ## Step 9 Approve Server CSR
 
-`kubectl get csr`
+`[master-1 certificates]$ kubectl get csr`
 
 ```
 NAME                                                   AGE   REQUESTOR                 CONDITION
@@ -390,7 +390,7 @@ csr-95bv6                                              20s   system:node:worker-
 
 Approve
 
-`kubectl certificate approve csr-95bv6`
+`[master-1 certificates]$ kubectl certificate approve csr-95bv6`
 
 Reference: https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#kubectl-approval
 
@@ -399,7 +399,7 @@ Reference: https://kubernetes.io/docs/reference/command-line-tools-reference/kub
 List the registered Kubernetes nodes from the master node:
 
 ```
-master-1$ kubectl get nodes --kubeconfig admin.kubeconfig
+[master-1 certificates]$ master-1$ kubectl get nodes --kubeconfig admin.kubeconfig
 ```
 
 > output
