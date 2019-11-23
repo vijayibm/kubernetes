@@ -194,7 +194,7 @@ EOF
 > Allow up to 10 seconds for the Kubernetes API Server to fully initialize.
 
 
-### Verification From one of the Master Node Example: On Master-1 
+### Verification
 
 ```
 [master-1 ~]$ kubectl get componentstatuses --kubeconfig admin.kubeconfig
@@ -209,7 +209,7 @@ etcd-1               Healthy   {"health": "true"}
 etcd-2               Healthy   {"health": "true"}
 ```
 
-> Remember to run the above commands on each controller node: `master-1`, and `master-2`.
+> Remember to run the above commands on each controller node: `master-1`, and `master-2` , `master-3`.
 
 ## The Kubernetes Frontend Load Balancer
 
