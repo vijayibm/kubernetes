@@ -5,25 +5,15 @@
 8 GB of RAM (Preferebly 16 GB)
 50 GB Disk space
 
-## Virtual Box
+## Virtual Machine
 
-Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) on any one of the supported platforms:
+ - KVM Linux Machine.
+ - master-1
+ - master-2
+ - master-3
+ - worker-1
+ - worker-2
 
- - Windows hosts
- - OS X hosts
- - Linux distributions
- - Solaris hosts
+Once KVM "Virtualization" is installed you may chose to deploy virtual machines manually on it or use script to deploy Virtual Machine on KVM Hypervisor.
 
-## Vagrant
-
-Once VirtualBox is installed you may chose to deploy virtual machines manually on it.
-Vagrant provides an easier way to deploy multiple virtual machines on VirtualBox more consistenlty.
-
-Download and Install [Vagrant](https://www.vagrantup.com/) on your platform.
-
-- Windows
-- Debian
-- Centos
-- Linux
-- macOS
-- Arch Linux
+Download Centos images form this site https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2 under the dir /var/lib/libvirt/images on your hypervisor.
