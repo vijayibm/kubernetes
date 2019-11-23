@@ -242,7 +242,7 @@ EOF
 ```
 
 ```
-loadbalancer# sudo service haproxy restart
+[loadbalancer ~]# sudo service haproxy restart
 ```
 
 ### Verification
@@ -250,7 +250,7 @@ loadbalancer# sudo service haproxy restart
 Make a HTTP request for the Kubernetes version info:
 
 ```
-curl  https://192.168.5.30:6443/version -k
+[loadbalancer ~]# curl  https://192.168.5.30:6443/version -k
 ```
 
 > output
