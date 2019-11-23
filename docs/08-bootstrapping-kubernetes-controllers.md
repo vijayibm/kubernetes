@@ -23,8 +23,7 @@ sudo mkdir -p /etc/kubernetes/config
 Download the official Kubernetes release binaries:
 
 ```
-wget -q --show-progress --https-only --timestamping \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-apiserver" \
+wget "https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-apiserver" \
   "https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-controller-manager" \
   "https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-scheduler" \
   "https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kubectl"
@@ -57,7 +56,7 @@ Install the Kubernetes binaries:
 The instance internal IP address will be used to advertise the API Server to members of the cluster. Retrieve the internal IP address for the current compute instance:
 
 ```
-INTERNAL_IP=$(ip addr show enp0s8 | grep "inet " | awk '{print $2}' | cut -d / -f 1)
+INTERNAL_IP=$(ip addr show eth0 | grep "inet " | awk '{print $2}' | cut -d / -f 1)
 ```
 
 Verify it is set
@@ -92,7 +91,7 @@ ExecStart=/usr/local/bin/kube-apiserver \\
   --etcd-cafile=/var/lib/kubernetes/ca.crt \\
   --etcd-certfile=/var/lib/kubernetes/etcd-server.crt \\
   --etcd-keyfile=/var/lib/kubernetes/etcd-server.key \\
-  --etcd-servers=https://192.168.5.11:2379,https://192.168.5.12:2379 \\
+  --etcd-servers=https://192.168.5.11:2379,https://192.168.5.12:2379,https://192.168.5.13:2379 \\
   --event-ttl=1h \\
   --encryption-provider-config=/var/lib/kubernetes/encryption-config.yaml \\
   --kubelet-certificate-authority=/var/lib/kubernetes/ca.crt \\
@@ -195,10 +194,10 @@ EOF
 > Allow up to 10 seconds for the Kubernetes API Server to fully initialize.
 
 
-### Verification
+### Verification From one of the Master Node Example: On Master-1 
 
 ```
-kubectl get componentstatuses --kubeconfig admin.kubeconfig
+[master-1 ~]$ kubectl get componentstatuses --kubeconfig admin.kubeconfig
 ```
 
 ```
@@ -207,6 +206,7 @@ controller-manager   Healthy   ok
 scheduler            Healthy   ok
 etcd-0               Healthy   {"health": "true"}
 etcd-1               Healthy   {"health": "true"}
+etcd-2               Healthy   {"health": "true"}
 ```
 
 > Remember to run the above commands on each controller node: `master-1`, and `master-2`.
