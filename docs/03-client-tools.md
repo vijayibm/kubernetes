@@ -21,8 +21,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD......8+08b vagrant@master-1
 Move public key of master to all other VMs
 
 ```
-[master-1 ~]$ for instance master-1 master-2 master-3 worker-1 worker-2 ; do ssh-copy-id $instance
-
+[master-1 ~]$ for instance master-1 master-2 master-3 worker-1 worker-2 ; do ssh-copy-id $instance ; done
 ```
 
 
@@ -52,7 +51,6 @@ Verify `kubectl` version 1.13.0 or higher is installed:
 
 ```
 [master-1 ~]$ kubectl version --client
-
 ```
 
 > output
@@ -61,4 +59,4 @@ Verify `kubectl` version 1.13.0 or higher is installed:
 Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.0", GitCommit:"ddf47ac13c1a9483ea035a79cd7c10005ff21a6d", GitTreeState:"clean", BuildDate:"2018-12-03T21:04:45Z", GoVersion:"go1.11.2", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-Previous: [Compute Resources](02-compute-resources.md)					Next: [Certificate Authority](04-certificate-authority.md)
+Previous: [Compute Resources](02-compute-resources.md)```				                 ```Next: [Certificate Authority](04-certificate-authority.md)
