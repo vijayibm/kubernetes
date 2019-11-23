@@ -9,7 +9,7 @@ In this lab you will generate an encryption key and an [encryption config](https
 Generate an encryption key:
 
 ```
-ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
+[master-1 certificates]$ ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
 ```
 
 ## The Encryption Config File
@@ -17,7 +17,7 @@ ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
 Create the `encryption-config.yaml` encryption config file:
 
 ```
-cat > encryption-config.yaml <<EOF
+[master-1 certificates]$ cat > encryption-config.yaml <<EOF
 kind: EncryptionConfig
 apiVersion: v1
 resources:
@@ -35,10 +35,8 @@ EOF
 Copy the `encryption-config.yaml` encryption config file to each controller instance:
 
 ```
-for instance in master-1 master-2; do
-  scp encryption-config.yaml ${instance}:~/
-done
+[master-1 certificates]$ for instance in master-1 master-2; do scp encryption-config.yaml ${instance}:~/ ; done
 ```
 Reference: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/#encrypting-your-data
 
-Next: [Bootstrapping the etcd Cluster](07-bootstrapping-etcd.md)
+Previous: [Generating the Data Encryption Config and Key](05-kubernetes-configuration-files.md) Next: [Bootstrapping the etcd Cluster](07-bootstrapping-etcd.md)
