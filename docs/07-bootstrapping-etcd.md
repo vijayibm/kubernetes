@@ -7,8 +7,7 @@ Kubernetes components are stateless and store cluster state in [etcd](https://gi
 The commands in this lab must be run on each controller instance: `master-1`, and `master-2`. Login to each of these using an SSH terminal.
 
 ### Running commands in parallel with tmux
-
-[tmux](https://github.com/tmux/tmux/wiki) can be used to run commands on multiple compute instances at the same time. See the [Running commands in parallel with tmux](01-prerequisites.md#running-commands-in-parallel-with-tmux) section in the Prerequisites lab.
+[tmux](https://github.com/tmux/tmux/wiki) can be used to run commands on multiple compute instances at the same time. See the [Running commands in parallel with tmux](https://learn.redhat.com/t5/Platform-Linux/Using-tmux-to-execute-commands-on-servers-in-parallel/td-p/2200) section in the Prerequisites lab.
 
 ## Bootstrapping an etcd Cluster Member
 
@@ -17,8 +16,7 @@ The commands in this lab must be run on each controller instance: `master-1`, an
 Download the official etcd release binaries from the [coreos/etcd](https://github.com/coreos/etcd) GitHub project:
 
 ```
-wget -q --show-progress --https-only --timestamping \
-  "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
+wget -c "https://github.com/coreos/etcd/releases/download/v3.3.9/etcd-v3.3.9-linux-amd64.tar.gz"
 ```
 
 Extract and install the `etcd` server and the `etcdctl` command line utility:
@@ -42,7 +40,7 @@ Extract and install the `etcd` server and the `etcdctl` command line utility:
 The instance internal IP address will be used to serve client requests and communicate with etcd cluster peers. Retrieve the internal IP address of the master(etcd) nodes:
 
 ```
-INTERNAL_IP=$(ip addr show enp0s8 | grep "inet " | awk '{print $2}' | cut -d / -f 1)
+INTERNAL_IP=$(ip addr show eth0 | grep "inet " | awk '{print $2}' | cut -d / -f 1)
 ```
 
 Each etcd member must have a unique name within an etcd cluster. Set the etcd name to match the hostname of the current compute instance:
@@ -75,7 +73,7 @@ ExecStart=/usr/local/bin/etcd \\
   --listen-client-urls https://${INTERNAL_IP}:2379,https://127.0.0.1:2379 \\
   --advertise-client-urls https://${INTERNAL_IP}:2379 \\
   --initial-cluster-token etcd-cluster-0 \\
-  --initial-cluster master-1=https://192.168.5.11:2380,master-2=https://192.168.5.12:2380 \\
+  --initial-cluster master-1=https://192.168.5.11:2380,master-2=https://192.168.5.12:2380,master-3=https://192.168.5.13:2380 \\
   --initial-cluster-state new \\
   --data-dir=/var/lib/etcd
 Restart=on-failure
@@ -93,6 +91,7 @@ EOF
   sudo systemctl daemon-reload
   sudo systemctl enable etcd
   sudo systemctl start etcd
+  sudo systemctl status etcd -l
 }
 ```
 
@@ -110,13 +109,15 @@ sudo ETCDCTL_API=3 etcdctl member list \
   --key=/etc/etcd/etcd-server.key
 ```
 
+
 > output
 
 ```
 45bf9ccad8d8900a, started, master-2, https://192.168.5.12:2380, https://192.168.5.12:2379
 54a5796a6803f252, started, master-1, https://192.168.5.11:2380, https://192.168.5.11:2379
+63c5796a6803f253, started, master-3, https://192.168.5.13:2380, https://192.168.5.13:2379
 ```
 
 Reference: https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#starting-etcd-clusters
 
-Next: [Bootstrapping the Kubernetes Control Plane](08-bootstrapping-kubernetes-controllers.md)
+Previous: [Bootstrapping the etcd Cluster](07-bootstrapping-etcd.md) Next: [Bootstrapping the Kubernetes Control Plane](08-bootstrapping-kubernetes-controllers.md)
