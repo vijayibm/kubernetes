@@ -6,7 +6,7 @@ This repository holds the supporting material for the [Certified Kubernetes Admi
 - [Answers to Practice Tests hosted on KodeKloud](/practice-questions-answers)
 
 
-# Kubernetes The Hard Way On VirtualBox
+# Kubernetes Cluster setup on KVM Hypervisor
 
 This tutorial walks you through setting up Kubernetes on a local machine using KVM Hypervisor.
 This guide is not for people looking for a fully automated command to bring up a Kubernetes cluster.
