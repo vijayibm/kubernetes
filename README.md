@@ -2,7 +2,7 @@
 
 This repository holds the supporting material for the [Certified Kubernetes Administrators Course](https://kodekloud.com/p/certified-kubernetes-administrator-with-practice-tests). There are two major sections. 
 
-- [Kubernetes The Hard Way on VirtualBox](#kubernetes-the-hard-way-on-virtualbox)
+- [Kubernetes on KVM Hypervisor](#kubernetes-on-KVM-Hypervisor)
 - [Answers to Practice Tests hosted on KodeKloud](/practice-questions-answers)
 
 
