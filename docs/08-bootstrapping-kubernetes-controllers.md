@@ -213,19 +213,18 @@ etcd-1               Healthy   {"health": "true"}
 
 ## The Kubernetes Frontend Load Balancer
 
-In this section you will provision an external load balancer to front the Kubernetes API Servers. The `kubernetes-the-hard-way` static IP address will be attached to the resulting load balancer.
+In this section you will provision an external load balancer to front the Kubernetes API Servers. The `kubernetes-exam-lab` static IP address will be attached to the resulting load balancer.
 
 
 ### Provision a Network Load Balancer
 
 ```
 #Install HAProxy
-loadbalancer# sudo apt-get update && sudo apt-get install -y haproxy
-
+[loadbalancer ~]# yum install -y haproxy
 ```
 
 ```
-loadbalancer# cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg 
+[loadbalancer ~]# cat <<EOF | sudo tee /etc/haproxy/haproxy.cfg 
 frontend kubernetes
     bind 192.168.5.30:6443
     option tcplog
@@ -238,6 +237,7 @@ backend kubernetes-master-nodes
     option tcp-check
     server master-1 192.168.5.11:6443 check fall 3 rise 2
     server master-2 192.168.5.12:6443 check fall 3 rise 2
+    server master-3 192.168.5.13:6443 check fall 3 rise 2
 EOF
 ```
 
@@ -269,4 +269,4 @@ curl  https://192.168.5.30:6443/version -k
 }
 ```
 
-Next: [Bootstrapping the Kubernetes Worker Nodes](09-bootstrapping-kubernetes-workers.md)
+Previous: [Bootstrapping the etcd Cluster](07-bootstrapping-etcd.md)Next: [Bootstrapping the Kubernetes Worker Nodes](09-bootstrapping-kubernetes-workers.md)
