@@ -19,8 +19,8 @@ LOADBALANCER_ADDRESS=192.168.5.30
 Generate a kubeconfig file for the `kube-proxy` service:
 
 ```
-{
-  kubectl config set-cluster kubernetes-the-hard-way \
+[master-1 certificates]$ {
+  kubectl config set-cluster kubernetes-exam-lab \
     --certificate-authority=ca.crt \
     --embed-certs=true \
     --server=https://${LOADBALANCER_ADDRESS}:6443 \
@@ -33,7 +33,7 @@ Generate a kubeconfig file for the `kube-proxy` service:
     --kubeconfig=kube-proxy.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=kubernetes-exam-lab \
     --user=system:kube-proxy \
     --kubeconfig=kube-proxy.kubeconfig
 
@@ -55,8 +55,8 @@ Reference docs for kube-proxy [here](https://kubernetes.io/docs/reference/comman
 Generate a kubeconfig file for the `kube-controller-manager` service:
 
 ```
-{
-  kubectl config set-cluster kubernetes-the-hard-way \
+[master-1 certificates]$ {
+  kubectl config set-cluster kubernetes-exam-lab \
     --certificate-authority=ca.crt \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
@@ -69,7 +69,7 @@ Generate a kubeconfig file for the `kube-controller-manager` service:
     --kubeconfig=kube-controller-manager.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=kubernetes-exam-lab \
     --user=system:kube-controller-manager \
     --kubeconfig=kube-controller-manager.kubeconfig
 
@@ -90,8 +90,8 @@ Reference docs for kube-controller-manager [here](https://kubernetes.io/docs/ref
 Generate a kubeconfig file for the `kube-scheduler` service:
 
 ```
-{
-  kubectl config set-cluster kubernetes-the-hard-way \
+[master-1 certificates]$ {
+  kubectl config set-cluster kubernetes-exam-lab \
     --certificate-authority=ca.crt \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
@@ -104,7 +104,7 @@ Generate a kubeconfig file for the `kube-scheduler` service:
     --kubeconfig=kube-scheduler.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=kubernetes-exam-lab \
     --user=system:kube-scheduler \
     --kubeconfig=kube-scheduler.kubeconfig
 
@@ -125,8 +125,8 @@ Reference docs for kube-scheduler [here](https://kubernetes.io/docs/reference/co
 Generate a kubeconfig file for the `admin` user:
 
 ```
-{
-  kubectl config set-cluster kubernetes-the-hard-way \
+[master-1 certificates]$ {
+  kubectl config set-cluster kubernetes-exam-lab \
     --certificate-authority=ca.crt \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
@@ -139,7 +139,7 @@ Generate a kubeconfig file for the `admin` user:
     --kubeconfig=admin.kubeconfig
 
   kubectl config set-context default \
-    --cluster=kubernetes-the-hard-way \
+    --cluster=kubernetes-exam-lab \
     --user=admin \
     --kubeconfig=admin.kubeconfig
 
@@ -162,17 +162,13 @@ Reference docs for kubeconfig [here](https://kubernetes.io/docs/tasks/access-app
 Copy the appropriate `kube-proxy` kubeconfig files to each worker instance:
 
 ```
-for instance in worker-1 worker-2; do
-  scp kube-proxy.kubeconfig ${instance}:~/
-done
+[master-1 certificates]$ for instance in worker-1 worker-2; do scp kube-proxy.kubeconfig ${instance}:~/ ; done
 ```
 
 Copy the appropriate `kube-controller-manager` and `kube-scheduler` kubeconfig files to each controller instance:
 
 ```
-for instance in master-1 master-2; do
-  scp admin.kubeconfig kube-controller-manager.kubeconfig kube-scheduler.kubeconfig ${instance}:~/
-done
+[master-1 certificates]$ for instance in master-1 master-2; do scp admin.kubeconfig kube-controller-manager.kubeconfig kube-scheduler.kubeconfig ${instance}:~/ ; done
 ```
 
-Next: [Generating the Data Encryption Config and Key](06-data-encryption-keys.md)
+Previous: [Certificate Authority](04-certificate-authority.md) Next: [Generating the Data Encryption Config and Key](06-data-encryption-keys.md)
