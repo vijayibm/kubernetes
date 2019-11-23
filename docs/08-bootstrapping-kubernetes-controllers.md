@@ -208,7 +208,7 @@ etcd-0               Healthy   {"health": "true"}
 etcd-1               Healthy   {"health": "true"}
 etcd-2               Healthy   {"health": "true"}
 ```
-
+> [Output](/tmux-images/tmux.png)
 > Remember to run the above commands on each controller node: `master-1`, and `master-2` , `master-3`.
 
 ## The Kubernetes Frontend Load Balancer
